@@ -8,7 +8,7 @@ This repository is the Rails App.
 **Congress Vote Alert**
 Any day congress votes on a bill, send me an email with the vote and the outcome.
 
-This example would work in the following ways. I have a small app deployed in the cloud that checks a government API once a day specifically requesting information on that days votes.  That small web app sends the information formatted as an ERGO::PAYLOAD:
+This example would work in the following ways. I have a small app deployed in the cloud that checks a government API once a day specifically requesting information on that days votes.  That small web app sends the information formatted as an Ergo::Payload:
 
 ```ruby```
 Ergo::Payload.new(name: 'Congressional Votes', count: 1, timestamp: 2014-10-10..., next_call: 2014-10-11, data: { text: "Today there were .....", tweet: '1 vote in congress today' })
@@ -16,11 +16,10 @@ Ergo::Payload.new(name: 'Congressional Votes', count: 1, timestamp: 2014-10-10..
 
 In Ergo, you can create a digest with the following rules
 
-Type -> 'Email'
-Frequency -> 'Daily'
-Event -> 'Congressional Votes'
-Count -> Greater Than 1
+-Type -> 'email_digest'
+-Frequency -> 'daily'
+-Event Name -> 'Congressional Votes'
+-Count -> 1
 
 Upon receiving this request, Ergo sees that the `next-call` will be the following day, so it knows that it can send the digest email for today. Ergo will then format an
-email with the name of the payload as the subject prefixed by ergo and put the `data->text` as the the body. What an email or tweet should so is meant to remain simple. It's the responsibility of the whatever service to define what should be in the payload. 
-
+email with the name of the payload as the subject prefixed by ergo and put the `data->text` as the the body. 
