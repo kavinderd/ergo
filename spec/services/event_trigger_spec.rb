@@ -14,14 +14,14 @@ describe EventTrigger do
     it "collects all triggers related to event" do
       expect(Trigger).to receive(:for_event).with(@event).and_return([@trigger])
       dub = class_double(SendResponse).as_stubbed_const
-      allow(dub).to receive(:for_trigger)
+      allow(dub).to receive(:for_trigger).and_return(double("send_response", send!: true))
       EventTrigger.new(@event).trigger_responses
     end
 
     it "sends valid triggers to SendResponse" do
       allow(Trigger).to receive(:for_event).with(@event).and_return([@trigger, @invalid_trigger, @invalid_trigger2])
       dub = class_double(SendResponse).as_stubbed_const
-      expect(dub).to receive(:for_trigger).with(@trigger).and_return(true)
+      expect(dub).to receive(:for_trigger).and_return(double("send_response", send!: true))
       e = EventTrigger.new(@event)
       e.trigger_responses
     end

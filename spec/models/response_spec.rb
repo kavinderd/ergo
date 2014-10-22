@@ -1,14 +1,22 @@
+require 'rails_helper'
 describe Response do
-  
-  context "email digests" do
+
+  context 'validity' do
+
     before(:each) do
-      @event = instance_double(Event, data: { "text" => "some data" } )
-      @trigger = instance_double(Trigger, action: 'digest')
+      @attrs = { trigger_id: 1, category: 'digest', start_at: 1.day.ago, end_at: Time.now, event_name: 'A random event' }
     end
 
-    it "sends send_email_digest message to ResponseMailer" do
-      response = Response.new(trigger: @trigger, events: [@event]).send! 
+    it "is valid with all required attributes" do
+      rp = Response.new(@attrs)
+      expect(rp).to be_valid
     end
-
+    
+    it "is invalid without all required attributes" do
+      @attrs.delete([:trigger_id, :category, :status].sample)
+      rp = Response.new(@attrs)
+      expect(rp).to_not be_valid
+    end
+    
   end
 end

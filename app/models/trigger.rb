@@ -5,6 +5,7 @@ class Trigger < ActiveRecord::Base
   validates_presence_of :event_name, :user, :frequency, :threshold, :action
    
   belongs_to :user
+  has_many :responses, inverse_of: :trigger
 
   scope :for_event, ->(event){ where("event_name = ?", event.name) }
 

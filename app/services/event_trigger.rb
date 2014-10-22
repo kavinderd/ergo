@@ -7,7 +7,7 @@ class EventTrigger
 
   def trigger_responses
     filter_respondable(Trigger.for_event(@event)).each do |trigger|
-      SendResponse.for_trigger(trigger)
+      SendResponse.for_trigger(trigger).send!
       trigger.update(sent_at: Time.now)
     end
   end
