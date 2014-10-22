@@ -1,7 +1,7 @@
 class Trigger < ActiveRecord::Base
   enum frequency: [ :hourly, :daily, :weekly, :monthly ]
   Frequency = { hourly: 1.hour, daily: 1.day, monthly: 1.month }
-  enum action: [ :email_digest, :email_alert ]
+  enum action: [ :digest, :alert, :status, :ping ]
   validates_presence_of :event_name, :user, :frequency, :threshold, :action
    
   belongs_to :user

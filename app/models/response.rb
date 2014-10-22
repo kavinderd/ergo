@@ -11,9 +11,8 @@ class Response
 
   private
 
-  def send_email_digest
+  def send_digest
     text = @events.map { |e| e.data["text"] }
-    ResponseMailer.email_digest(text).deliver
   end
 
 end
