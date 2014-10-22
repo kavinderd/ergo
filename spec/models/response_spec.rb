@@ -13,7 +13,7 @@ describe Response do
     end
     
     it "is invalid without all required attributes" do
-      @attrs.delete([:trigger_id, :category, :status].sample)
+      @attrs.delete([:trigger_id, :category].sample)
       rp = Response.new(@attrs)
       expect(rp).to_not be_valid
     end
