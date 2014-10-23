@@ -29,6 +29,9 @@ gem 'spring',        group: :development
 # User Auth
 gem 'devise'
 
+# Easy Forms
+gem 'simple_form'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -43,6 +46,7 @@ gem 'devise'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'rspec-activemodel-mocks'
   gem 'capybara'
   gem 'pry'
   gem 'pry-debugger'

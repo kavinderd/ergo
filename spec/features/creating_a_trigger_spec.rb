@@ -7,14 +7,17 @@ feature 'Creating Scenarios' do
     visit '/users/sign_in'
     fill_in 'user_email', with: u.email
     fill_in 'user_password', with: 'mypassword'
+    click_button 'Sign in'
   end
 
   scenario 'creating a new scenario from /scenarios/new' do
-    click_button 'New Scenario'
-    fill_in :event_name, with: 'Upcoming Sporting Events'
-    select('daily', from: 'frequency')
-    fill_in :frequency, with: 5
-    select('digest', from: 'action')
+    click_link 'New Trigger'
+    fill_in 'trigger_event_name', with: 'Upcoming Sporting Events'
+    select('daily', from: 'trigger_frequency')
+    select('digest', from: 'trigger_action')
+    fill_in 'trigger_threshold', with: 5
+    click_button 'Create'
+    expect(page).to have_content "Upcoming Sporting Events"
   end
 
 

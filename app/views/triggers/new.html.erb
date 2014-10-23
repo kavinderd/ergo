@@ -1,0 +1,7 @@
+<%= simple_form_for @trigger do |f| %>
+  <%= f.input :event_name %>
+  <%= f.input :frequency, collection: Trigger.frequencies.keys %>
+  <%= f.input :action, collection: Trigger.actions.keys %>
+  <%= f.input :threshold %>
+  <%= f.submit 'Create' %>
+<% end %>

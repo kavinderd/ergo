@@ -13,6 +13,11 @@ RSpec.describe "home/index" do
       render
       expect(rendered).to match /Dashboard/
     end
+
+    it "has a link to creating a new scenario" do
+      render
+      expect(rendered).to match /New Trigger/
+    end
   end
 
   context "without being signed in" do
