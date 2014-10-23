@@ -20,6 +20,7 @@ RSpec.describe "home/index" do
     it "renders the public_home partial" do
       render
       expect(rendered).to match /Sign In/
+      expect(rendered).to match /Sign Up/
     end
   end
 
