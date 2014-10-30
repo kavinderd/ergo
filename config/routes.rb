@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :triggers
   resources :clients
+  resources :tokens, only: [:create]
 
   namespace :api do
     namespace :v1 do
