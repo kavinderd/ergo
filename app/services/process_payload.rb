@@ -1,6 +1,7 @@
 require 'json'
 class ProcessPayload
 
+  attr_reader :event
   def initialize(payload)
     @payload = payload
   end
