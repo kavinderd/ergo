@@ -14,6 +14,7 @@ feature "User Clients" do
     click_link 'Add a Client'
     fill_in 'client_name', with: 'Digest Client'
     fill_in 'client_url', with: 'http://some-place.com'
+    fill_in "client_endpoint", with: "/events"
     fill_in 'client_token', with: '1234567890'
     click_button 'Create'
   end

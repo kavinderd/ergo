@@ -3,5 +3,6 @@
   <%= f.input :frequency, collection: Trigger.frequencies.keys %>
   <%= f.input :action, collection: Trigger.actions.keys %>
   <%= f.input :threshold %>
+  <%= f.association :clients, collection: current_user.clients, as: :check_boxes %>
   <%= f.submit 'Create' %>
 <% end %>

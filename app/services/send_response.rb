@@ -13,7 +13,9 @@ class SendResponse
 
   def send!
     record = create_response_record
-    # Send Response to Api Client
+    @trigger.clients.each do |client|
+      HttpResponse.post(url: client.url, endpoint: "/test", data: "Some data")
+    end
   end
 
   private

@@ -1,1 +1,5 @@
-<%= @trigger.event_name %>
+<%= @trigger.event_name %><br>
+<%= @trigger.threshold %>
+<% @trigger.clients.each do |client| %>
+  <%= client.name %>
+<% end %>

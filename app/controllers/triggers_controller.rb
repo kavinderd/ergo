@@ -21,7 +21,7 @@ class TriggersController < ApplicationController
   private
 
   def trigger_params
-    params.require(:trigger).permit(:event_name, :frequency, :action, :threshold)
+    params.require(:trigger).permit(:event_name, :frequency, :action, :threshold, :client_ids)
   end
 
 end

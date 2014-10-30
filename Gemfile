@@ -32,6 +32,9 @@ gem 'devise'
 # Easy Forms
 gem 'simple_form'
 
+#Sending HTTP
+gem 'faraday'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

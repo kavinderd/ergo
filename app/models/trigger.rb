@@ -6,6 +6,8 @@ class Trigger < ActiveRecord::Base
    
   belongs_to :user, inverse_of: :triggers
   has_many :responses, inverse_of: :trigger
+  has_many :targetings, inverse_of: :trigger
+  has_many :clients, through: :targetings
 
   scope :for_event, ->(event){ where("event_name = ?", event.name) }
 
