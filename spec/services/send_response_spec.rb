@@ -5,7 +5,7 @@ describe SendResponse do
     @event1 = instance_double(Event, name: "A new movie", data: { text: "Star Wars Episode VII in Theaters Soon"}, created_at: 5.days.ago )
     @event2 = instance_double(Event, name: "A new movie", data: { text: "Star Wars Episode VIII in Theaters Soon" }, created_at: 3.days.ago )
     @event_dub = class_double(Event).as_stubbed_const
-    client_dub = double("clients", url: "someurl.com")
+    client_dub = object_double(Client.new, url: "someurl.com", endpoint: "/events")
     @trigger = instance_double(Trigger, event_name: "A new movie", action: 'digest', clients: [client_dub])
     @client_dub = class_double(HttpResponse).as_stubbed_const
   end

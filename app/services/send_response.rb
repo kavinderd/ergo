@@ -14,7 +14,7 @@ class SendResponse
   def send!
     record = create_response_record
     @trigger.clients.each do |client|
-      HttpResponse.post(url: client.url, endpoint: "/test", data: "Some data")
+      HttpResponse.post(url: client.url, endpoint: client.endpoint, data: @events.last.data)
     end
   end
 
