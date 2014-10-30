@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :triggers
+  resources :clients
 
   namespace :api do
     namespace :v1 do

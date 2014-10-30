@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :triggers, inverse_of: :user
+  has_many :clients, inverse_of: :user
   has_one :api_key, inverse_of: :user
+  
 
   def token
     api_key.token if api_key

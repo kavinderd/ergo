@@ -17,6 +17,7 @@ RSpec.describe "home/index" do
     it "has a link to creating a new scenario" do
       render
       expect(rendered).to match /New Trigger/
+      expect(rendered).to match /Add a Client/
     end
   end
 
