@@ -1,4 +1,5 @@
 # Ergo (Under Construction)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/kavinderd/ergo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Ergo is a micro-service similar to IFTT or Huginn but with much more limited abilities. Ergo is intended to be used to send digest emails, tweets, or similar alert notifications. Ergo does not connect to any external service, but can be sent JSON payloads through it's api (ergo-api).  Ergo has been created as just a practice app for myself, but I intend to use it for various digest emails to avoid having to manually check sites.
 
