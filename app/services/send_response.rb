@@ -13,8 +13,9 @@ class SendResponse
 
   def send!
     record = create_response_record
+    data = FormatResponse.new(@events).format(response_type)
     @trigger.clients.each do |client|
-      HttpResponse.post(url: client.url, endpoint: client.endpoint, data: @events.last.data)
+      HttpResponse.post(url: client.url, endpoint: client.endpoint, data: { response_type.to_sym => data})
     end
   end
 
@@ -30,6 +31,10 @@ class SendResponse
 
   def last_event
     @last_event ||= @events.last
+  end
+
+  def response_type
+    @category ||= @trigger.action 
   end
 
 end
