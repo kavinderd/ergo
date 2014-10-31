@@ -4,17 +4,6 @@ module Api
       before_filter :restrict_access
       respond_to :json
 
-      api :POST, "/api/v1/events"
-      param :token, String, required: true
-      param :event, Hash, desc: "Event parameter hash" do
-        param :name, String, required: true, desc: "Event name"
-        param :count, Fixnum, required: true, desc: "The count of this event, >= 0"
-        param :next_call, DateTime, required: true, desc: "The next time this event will be called"
-        param :data, Hash, desc: "The event data" do
-          param :text, String, desc: "The event data as text"
-        end
-      end
-      error 400, "Error creating event"
       def create
         process = ProcessPayload.new(event_params)
         if process.create_event
