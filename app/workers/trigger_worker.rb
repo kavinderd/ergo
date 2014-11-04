@@ -6,6 +6,7 @@ class TriggerWorker
     return nil unless @trigger 
     count = Event.with_name(@trigger.event_name).since(@trigger.trigger_period).sum(:count)
     if triggerable?(count) && sendable?
+      puts "Trigger Sending"
       SendResponse.for_trigger(@trigger).send!
       @trigger.update(sent_at: Time.now)
     end
