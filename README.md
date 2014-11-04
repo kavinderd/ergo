@@ -32,7 +32,7 @@ Any day congress votes on a bill, send me an email with the vote and the outcome
 This example would work in the following ways. I have a small app deployed in the cloud that checks a government API once a day specifically requesting information on that days votes.  That small web app sends the information formatted as an Ergo::Event:
 
 ```ruby```
-post "/api/v1/events", token: "USER TOKEN", event { name: "Congressional Votes", count: 1, next_call: "2014-10-11...", data: { text: "Today there were ..." } 
+post "/api/v1/events", token: "USER TOKEN", event { name: "Congressional Votes", count: 1, data: { text: "Today there were ..." } 
 ```
 
 If there is an Ergo::Trigger that is set to send a response when it receives "Congressional Votes" on a daily basis, then this event will trigger an HTTP response to one or more Ergo::Clients
