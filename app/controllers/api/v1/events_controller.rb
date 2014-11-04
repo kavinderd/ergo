@@ -2,6 +2,7 @@ module Api
   module V1
     class EventsController < ApplicationController
       before_filter :restrict_access
+      skip_before_filter :verify_authenticity_token
       respond_to :json
 
       def create

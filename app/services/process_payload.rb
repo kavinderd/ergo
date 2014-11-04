@@ -7,8 +7,8 @@ class ProcessPayload
   end
 
   def create_event
-    @event = Event.create!(@payload)
-    @event.valid?
+    @event = Event.new(@payload)
+    @event.save
   end
 
   def errors

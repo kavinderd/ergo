@@ -14,9 +14,7 @@ class ApplicationController < ActionController::Base
 
   def restrict_access_by_header
     return true if api_key
-    authenticate_with_http_token do |token|
-      @api_key = ApiKey.find_by_token(token)
-    end
+    @api_key = ApiKey.find_by_token(request.headers[:token])
   end
 
   def restrict_access_by_params

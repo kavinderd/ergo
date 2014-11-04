@@ -1,6 +1,6 @@
 <h1> Dashboard </h1>
 <%= link_to 'New Trigger', new_trigger_path %><br>
-<%= link_to 'Add a Client', new_client_path %>
+<%= link_to 'Add a Client', new_client_path %><br>
 <% if current_user.token %>
   <%= "Your Api Token: #{current_user.token}"%>
 <% else %>

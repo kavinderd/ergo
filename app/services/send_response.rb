@@ -1,7 +1,7 @@
 class SendResponse
 
   def self.for_trigger(trigger)
-    events = Event.with_name(trigger.event_name)
+    events = Event.with_name(trigger.event_name).since(trigger.trigger_period)
     self.new(trigger, events)
   end
 

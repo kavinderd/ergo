@@ -12,7 +12,15 @@ class Trigger < ActiveRecord::Base
   scope :for_event, ->(event){ where("event_name = ?", event.name) }
 
   def send_at
-    time = Frequency[frequency.to_sym]
-    self.sent_at ? self.sent_at + time : self.created_at + time
+    self.sent_at ? self.sent_at + frequency_time : self.created_at + frequency_time
   end
+
+  def trigger_period
+    self.sent_at ? self.sent_at : Time.now - frequency_time
+  end
+
+  def frequency_time
+    Frequency[frequency.to_sym]
+  end
+
 end
