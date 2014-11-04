@@ -32,7 +32,7 @@ describe EventTrigger do
 
   context "#perform" do
 
-    context "when a response needs to be sent" do
+    context "when a response should to be sent" do
 
       before(:each) do
         @event = object_double(Event.new, name: "A new movie", count: 1, next_call: 1.day.from_now)
@@ -70,7 +70,24 @@ describe EventTrigger do
         EventTrigger.new.perform(1)
         expect(EventTrigger).to have_enqueued_job(1)
       end
+
     end
+
+    context "when the trigger does not exist" do
+
+      before(:each) do
+        @trigger_dub = class_double(Trigger).as_stubbed_const
+      end
+
+      it "doesn't schedule another job" do
+        allow(Trigger).to receive(:find).with(1).and_return(nil)
+        EventTrigger.new.perform(1)
+        expect(EventTrigger.jobs).to eq([])
+      end
+
+
+    end
+
     
 
 
