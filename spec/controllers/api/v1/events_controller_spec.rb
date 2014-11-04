@@ -5,7 +5,7 @@ RSpec.describe Api::V1::EventsController, type: :controller do
   context "POST 'create'" do
     
     before(:each) do
-      @payload = { name: 'Weather Change', count: "1", next_call: "2014-10-29 14:13:05 UTC", data: { text: "It't going to be 10 degrees colder tomorrow" } }.with_indifferent_access
+      @payload = { name: 'Weather Change', count: "1", data: { text: "It't going to be 10 degrees colder tomorrow" } }.with_indifferent_access
       @processor = object_double(ProcessPayload.new(@payload),event: double("event"))
       @class_double = class_double(ProcessPayload).as_stubbed_const
       @dumb_token = object_double(ApiKey.new)

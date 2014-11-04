@@ -6,7 +6,7 @@ describe TriggerWorker do
     context "when a response should to be sent" do
 
       before(:each) do
-        @event = object_double(Event.new, name: "A new movie", count: 1, next_call: 1.day.from_now)
+        @event = object_double(Event.new, name: "A new movie", count: 1) 
         @event_class =class_double(Event).as_stubbed_const
         @trigger = object_double(Trigger.new, event_name: "A new movie", threshold: 1, frequency_time: 1.day, last_sent: 1.day.ago - 1.minute, update: true, trigger_period: 1.day.ago)
         @trigger_dub = class_double(Trigger).as_stubbed_const

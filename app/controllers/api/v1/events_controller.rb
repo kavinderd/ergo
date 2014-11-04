@@ -17,7 +17,7 @@ module Api
       private 
 
       def event_params
-        params.require(:event).permit(:name, :count, { data: :text }, :next_call)
+        params.require(:event).permit(:name, :count, { data: :text })
       end
     end
   end
