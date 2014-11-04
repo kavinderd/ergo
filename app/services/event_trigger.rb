@@ -1,33 +1,24 @@
 class EventTrigger 
+  include Sidekiq::Worker
 
-  attr_reader :respondable_triggers
-  def initialize(event)
-    @event = event
-  end
-
-  def trigger_responses
-    filter_respondable(Trigger.for_event(@event)).each do |trigger|
-      SendResponse.for_trigger(trigger).send!
-      trigger.update(sent_at: Time.now)
+  def perform(trigger_id)
+    @trigger = Trigger.find(trigger_id)
+    count = Event.with_name(@trigger.event_name).since(@trigger.trigger_period).sum(:count)
+    if triggerable?(count) && sendable?
+      SendResponse.for_trigger(@trigger).send!
+      @trigger.update(sent_at: Time.now)
     end
+    EventTrigger.perform_in(@trigger.frequency_time, trigger_id)
   end
 
   private
-  
-  def filter_respondable(triggers)
-    triggers.select do |trigger|
-      if trigger_over_threshold?(trigger) && trigger_due?(trigger)
-        trigger
-      end
-    end
+
+  def triggerable?(count)
+    @trigger.threshold <= count
   end
 
-  def trigger_over_threshold?(trigger)
-    trigger.threshold <= @event.count
-  end
-
-  def trigger_due?(trigger)
-    @event.next_call >= trigger.send_at
+  def sendable?
+    @trigger.last_sent <= @trigger.trigger_period
   end
 
 end

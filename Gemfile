@@ -38,6 +38,9 @@ gem 'faraday'
 #Api Docs
 gem 'apipie-rails'
 
+# Background Jobs
+gem 'sidekiq'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -56,5 +59,7 @@ group :development, :test do
   gem 'capybara'
   gem 'pry'
   gem 'pry-debugger'
+  gem 'rspec-sidekiq'
+  gem 'timecop'
 end
 

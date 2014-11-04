@@ -6,7 +6,6 @@ RSpec.describe Api::V1::EventsController, type: :controller do
     
     before(:each) do
       @payload = { name: 'Weather Change', count: "1", next_call: "2014-10-29 14:13:05 UTC", data: { text: "It't going to be 10 degrees colder tomorrow" } }.with_indifferent_access
-      @trigger = class_double(EventTrigger).as_stubbed_const
       @processor = object_double(ProcessPayload.new(@payload),event: double("event"))
       @class_double = class_double(ProcessPayload).as_stubbed_const
       @dumb_token = object_double(ApiKey.new)
@@ -18,7 +17,6 @@ RSpec.describe Api::V1::EventsController, type: :controller do
       allow(@class_double).to receive(:new).with(@payload).and_return(@processor) 
       allow(@processor).to receive(:create_event).and_return(true)
       expect(@api_double).to receive(:find_by_token).with(@token).and_return(@dumb_token)
-      allow(@trigger).to receive_message_chain(:new, :trigger_responses)
       post :create, event: @payload, token: @token
     end
 
@@ -31,24 +29,15 @@ RSpec.describe Api::V1::EventsController, type: :controller do
       it "initializes a ProcessPayload with the params" do
         expect(@class_double).to receive(:new).with(@payload).and_return(@processor) 
         expect(@processor).to receive(:create_event).and_return(true)
-        allow(@trigger).to receive_message_chain(:new, :trigger_responses)
         post :create, event: @payload, token: @token
       end
 
       it "renders a success message with a successful save" do
         allow(@class_double).to receive(:new).with(@payload).and_return(@processor) 
         allow(@processor).to receive(:create_event).and_return(true)
-        allow(@trigger).to receive_message_chain(:new, :trigger_responses)
         post :create, event: @payload, token: @token
         body = JSON.parse(response.body)
         expect(body["message"]).to eq("Event Saved")
-      end
-
-      it "sends the created event to an event trigger" do
-        allow(@class_double).to receive(:new).with(@payload).and_return(@processor) 
-        allow(@processor).to receive(:create_event).and_return(true)
-        expect(@trigger).to receive_message_chain(:new, :trigger_responses)
-        post :create, event: @payload, token: @token
       end
 
     end

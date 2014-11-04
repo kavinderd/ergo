@@ -8,8 +8,6 @@ module Api
       def create
         process = ProcessPayload.new(event_params)
         if process.create_event
-          # Don't like this two step, I think a class HandleEvent or something would be better
-          EventTrigger.new(process.event).trigger_responses
           render json: { message: "Event Saved" }, status: 200
         else
           render json: { message: process.errors }, status: 400

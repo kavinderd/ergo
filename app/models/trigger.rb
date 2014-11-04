@@ -23,4 +23,8 @@ class Trigger < ActiveRecord::Base
     Frequency[frequency.to_sym]
   end
 
+  def last_sent
+    self.sent_at ? self.sent_at : self.created_at 
+  end
+
 end
