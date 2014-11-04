@@ -32,7 +32,7 @@ RSpec.describe TriggersController, :type => :controller do
         @user = object_double(User.new, triggers: triggers)
         request.env['warden'] = double(Warden, authenticate: @user, authenticate!: @user)
         @trigger_dub = stub_model(Trigger, save: true, id: 1, frequency_time: 1.day)
-        @event_trigger = class_double(EventTrigger).as_stubbed_const
+        @event_trigger = class_double(TriggerWorker).as_stubbed_const
       end
 
       it "builds a trigger with the trigger params" do

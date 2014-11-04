@@ -40,6 +40,7 @@ gem 'apipie-rails'
 
 # Background Jobs
 gem 'sidekiq'
+gem 'sinatra', '>= 1.3.0', require: nil
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -59,7 +60,8 @@ group :development, :test do
   gem 'capybara'
   gem 'pry'
   gem 'pry-debugger'
-  gem 'rspec-sidekiq'
   gem 'timecop'
 end
+
+gem 'rspec-sidekiq', group: :test
 

@@ -1,4 +1,4 @@
-class EventTrigger 
+class TriggerWorker
   include Sidekiq::Worker
 
   def perform(trigger_id)
@@ -9,7 +9,7 @@ class EventTrigger
       SendResponse.for_trigger(@trigger).send!
       @trigger.update(sent_at: Time.now)
     end
-    EventTrigger.perform_in(@trigger.frequency_time, trigger_id)
+    TriggerWorker.perform_in(@trigger.frequency_time, trigger_id)
   end
 
   private
