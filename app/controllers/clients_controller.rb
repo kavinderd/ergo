@@ -21,6 +21,6 @@ class ClientsController < ApplicationController
   private
 
   def client_params
-    params.require(:client).permit(:name, :url, :token)
+    params.require(:client).permit(:name, :url, :token, :endpoint)
   end
 end
