@@ -14,7 +14,7 @@ ADD . /home/app/ergo
 WORKDIR /home/app/ergo
 
 RUN chown -R app:app /home/app/ergo
-RUN sudo -u app bundle install --deployment
+RUN sudo -u app RAILS_ENV=production bundle install --deployment
 RUN sudo -u app RAILS_ENV=production rake assets:precompile
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
